@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PrimariaRouteImport } from './routes/primaria'
+import { Route as SecundariaRouteImport } from './routes/secundaria'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrimariaRoute = PrimariaRouteImport.update({
+  id: '/primaria',
+  path: '/primaria',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecundariaRoute = SecundariaRouteImport.update({
+  id: '/secundaria',
+  path: '/secundaria',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/primaria': typeof PrimariaRoute
+  '/secundaria': typeof SecundariaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/primaria': typeof PrimariaRoute
+  '/secundaria': typeof SecundariaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/primaria': typeof PrimariaRoute
+  '/secundaria': typeof SecundariaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/primaria' | '/secundaria'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/primaria' | '/secundaria'
+  id: '__root__' | '/' | '/primaria' | '/secundaria'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PrimariaRoute: typeof PrimariaRoute
+  SecundariaRoute: typeof SecundariaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/primaria': {
+      id: '/primaria'
+      path: '/primaria'
+      fullPath: '/primaria'
+      preLoaderRoute: typeof PrimariaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/secundaria': {
+      id: '/secundaria'
+      path: '/secundaria'
+      fullPath: '/secundaria'
+      preLoaderRoute: typeof SecundariaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PrimariaRoute: PrimariaRoute,
+  SecundariaRoute: SecundariaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
