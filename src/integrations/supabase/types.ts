@@ -14,16 +14,133 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      ajustes: {
+        Row: {
+          color_acento: string
+          color_primario: string
+          color_secundario: string
+          id: number
+          nombre_colegio: string
+          updated_at: string
+        }
+        Insert: {
+          color_acento?: string
+          color_primario?: string
+          color_secundario?: string
+          id?: number
+          nombre_colegio?: string
+          updated_at?: string
+        }
+        Update: {
+          color_acento?: string
+          color_primario?: string
+          color_secundario?: string
+          id?: number
+          nombre_colegio?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      consultas: {
+        Row: {
+          created_at: string
+          grado: number | null
+          id: string
+          materia: string | null
+          nivel: Database["public"]["Enums"]["nivel_edu"]
+          pregunta: string
+          respuesta: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          grado?: number | null
+          id?: string
+          materia?: string | null
+          nivel: Database["public"]["Enums"]["nivel_edu"]
+          pregunta: string
+          respuesta?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          grado?: number | null
+          id?: string
+          materia?: string | null
+          nivel?: Database["public"]["Enums"]["nivel_edu"]
+          pregunta?: string
+          respuesta?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          activo: boolean
+          created_at: string
+          email: string | null
+          full_name: string
+          grado: number | null
+          id: string
+          nivel: Database["public"]["Enums"]["nivel_edu"] | null
+          seccion: string | null
+        }
+        Insert: {
+          activo?: boolean
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          grado?: number | null
+          id: string
+          nivel?: Database["public"]["Enums"]["nivel_edu"] | null
+          seccion?: string | null
+        }
+        Update: {
+          activo?: boolean
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          grado?: number | null
+          id?: string
+          nivel?: Database["public"]["Enums"]["nivel_edu"] | null
+          seccion?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "student"
+      nivel_edu: "primaria" | "secundaria"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +267,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "student"],
+      nivel_edu: ["primaria", "secundaria"],
+    },
   },
 } as const
