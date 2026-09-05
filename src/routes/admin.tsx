@@ -190,9 +190,8 @@ function AjustesPanel({ ajustes, setAjustes }: { ajustes: Ajustes; setAjustes: (
     setPassMsg(null);
     const { error } = await supabase.auth.updateUser({
       password: pass.nueva,
-      // @ts-expect-error current_password es requerido por Lovable Cloud
       current_password: pass.actual,
-    });
+    } as { password: string });
     setPassMsg(error ? "No se pudo cambiar: " + error.message : "Contraseña actualizada.");
     if (!error) setPass({ actual: "", nueva: "" });
   }
