@@ -26,7 +26,7 @@ function PrimariaPage() {
         <p className="text-sm font-semibold uppercase tracking-wide text-primary">Nivel Primaria</p>
         <h1 className="mt-1 text-3xl font-bold">Aprende paso a paso</h1>
         <p className="mt-2 max-w-2xl text-muted-foreground">
-          Cuéntale tu duda a la Guía. Te dará una pista, un paso para intentar y una pregunta para
+          Cuéntale tu duda a la Guía. Te dará una pista y un paso para intentar, o una pregunta para
           comprobar si vas bien.
         </p>
         <div className="mt-6">
