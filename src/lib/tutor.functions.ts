@@ -27,11 +27,31 @@ Restricciones clave:
 Responde siempre en español, en formato breve y ordenado. Materia actual: ${materia}.`;
 
   if (nivel === "primaria") {
+    const g = grado ?? 3;
+    let dificultad: string;
+    if (g <= 2) {
+      dificultad = `Nivel de texto: MUY fácil (1°-2° grado). Frases de máximo 8-10 palabras, palabras de uso diario, sin términos técnicos. Usa ejemplos con juguetes, animales, dulces o juegos. Una sola idea por frase. Tono muy cálido y animador, como un amigo mayor. Máximo 100 palabras.`;
+    } else if (g <= 4) {
+      dificultad = `Nivel de texto: fácil (3°-4° grado). Frases cortas y claras, vocabulario sencillo con alguna palabra nueva explicada entre paréntesis. Ejemplos cotidianos (recreo, mascotas, comida, deportes). Tono cálido. Máximo 120 palabras.`;
+    } else {
+      dificultad = `Nivel de texto: intermedio (5°-6° grado). Frases un poco más largas, vocabulario algo más rico, puedes introducir términos escolares simples explicándolos brevemente. Ejemplos variados. Tono animador pero más de "compañero de estudio". Máximo 150 palabras.`;
+    }
     return `${base}
-Público: estudiante de primaria${grado ? `, ${grado}° grado` : ""}. Usa frases cortas, vocabulario sencillo y ejemplos cotidianos (juguetes, deportes, comida). Tono cálido y animador, pero sin infantilizar en exceso. Máximo 150 palabras.`;
+Público: estudiante de primaria, ${g}° grado.
+${dificultad}`;
+  }
+  const g = grado ?? 3;
+  let dificultad: string;
+  if (g <= 2) {
+    dificultad = `Nivel de texto: claro y directo (1°-2° año de secundaria). Frases sencillas, explica cada término académico la primera vez que lo uses, ejemplos de la vida diaria del adolescente. Tono respetuoso, sin tecnicismos innecesarios. Máximo 180 palabras.`;
+  } else if (g <= 4) {
+    dificultad = `Nivel de texto: académico medio (3°-4° año de secundaria). Vocabulario académico correcto, conecta con conceptos previos del curso, exige justificar las ideas. Máximo 220 palabras.`;
+  } else {
+    dificultad = `Nivel de texto: académico avanzado (5°-6° año, pre-universitario). Vocabulario técnico de la materia, referencias a teorías o autores cuando aplique, exige pensamiento crítico y argumentación rigurosa, sugiere fuentes para investigar. Máximo 250 palabras.`;
   }
   return `${base}
-Público: estudiante de secundaria${grado ? `, ${grado}° año` : ""}. Tono respetuoso y adulto, nada infantil. Usa vocabulario académico correcto, exige justificación y pensamiento crítico, sugiere fuentes o conceptos para investigar. Máximo 220 palabras.`;
+Público: estudiante de secundaria, ${g}° año. Tono respetuoso y adulto, nada infantil.
+${dificultad}`;
 }
 
 export const preguntarTutor = createServerFn({ method: "POST" })
